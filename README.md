@@ -1,37 +1,28 @@
-## Welcome to GitHub Pages
+### **簡介**
+這是由一位正在學習R語言的學生所建立的網頁，網頁內容為整理之筆記。
 
-You can use the [editor on GitHub](https://github.com/hank830214/R_Learning_Notes/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### **課程內容**
+- [基本指令](https://hank830214.github.io/r_prg_web/basic)
 
-### Markdown
+- 資料型別
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+    - 單一變數之資料型別
 
-```markdown
-Syntax highlighted code block
+    - 多變數之資料型別
+  
+- [讀取各類資料](https://hank830214.github.io/r_prg_web/read_data)
 
-# Header 1
-## Header 2
-### Header 3
+- 基本繪圖
 
-- Bulleted
-- List
+    - [Base Plotting System](https://hank830214.github.io/r_prg_web/based_plotting)
 
-1. Numbered
-2. List
+    - [ggplot2](https://hank830214.github.io/r_prg_web/ggplot2)
+    
 
-**Bold** and _Italic_ and `Code` text
+### **推薦網站**
 
-[Link](url) and ![Image](src)
-```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### **參考用書**
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/hank830214/R_Learning_Notes/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+- [R軟體-資料分析基礎與應用 Jared P. Lander著](http://www.flag.com.tw/book/bookinfo.asp?bokno=F8736)
