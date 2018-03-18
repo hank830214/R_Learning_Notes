@@ -1,0 +1,170 @@
+---
+output: html_document
+---
+
+##  **文字資料處理：基本函數**<br />
+<br />
+
+#### **基本的文字函數**<br />
+<br />
+**<font color=blue>`nchar()`</font>: 計算字元數**<br />
+```{r results='hide'}
+nchar("Hank Chu")
+nchar("資料分析")
+nchar(c("Tony", "Tommy"))
+```
+<br />
+<br />
+**<font color=blue>`toupper()`</font>: 轉換大寫**<br />
+**<font color=blue>`tolower()`</font>: 轉換小寫**<br />
+```{r results='hide'}
+toupper("How are you?")
+tolower("How are you?")
+```
+<br />
+<br />
+**<font color=blue>`sprintf()`</font>: 格式化輸出**<br />
+\# `%d`: 10 進位整數<br />
+\# `%o`: 8 進位整數<br />
+\# `%x`: 16 進位整數<br />
+```{r results='hide'}
+x <- 16
+sprintf('Dec x = %d, Oct x = %o, Hex x = %x', x, x, x)
+
+year <- 2018
+month <- 3
+day <- 18
+sprintf('Today is %04d%02d%02d', year, month, day)
+```
+\# `%f`: 10 進位浮點數<br />
+```{r results='hide'}
+sprintf('PI = |%f|', pi)       # 預設為小數點第六位
+sprintf('PI = |%.4f|', pi)     # 四捨五入至小數點第四位
+sprintf('PI = |%8.4f|', pi)    # 四捨五入至小數點第四位，並設定總長至少為8(含小數點)，空白補在左邊
+sprintf('PI = |%-8.4f|', pi)   # 四捨五入至小數點第四位，並設定總長至少為8(含小數點)，空白補在右邊
+```
+\# `%s`: 文字<br />
+```{r results='hide'}
+sprintf('|%7s|','abc')         # 設定總長至少為7，不足左補空白
+sprintf('|%-7s|','abc')        # 設定總長至少為7，不足右補空白
+sprintf('|%.3s|', 'abcdefg')   # 取字串的前3位
+sprintf('|%7.4s|', 'abcdefg')  # 取自串的前4位，並設定總長至少為7
+sprintf('|%4.7s|', 'abcdefg')  # 取自串的前7位，並設定總長至少為4
+```
+<br />
+\# 欲輸出特殊字元<br />
+\# 使用 `\` 來跳多字元，並搭配函數`cat()`<br />
+```{r results='hide'}
+sprintf('My name is \"Tony\".')
+cat(sprintf('My name is \"Tony\".'))
+
+sprintf('I\'m sorry!')
+cat(sprintf('I\'m sorry!'))
+```
+<br />
+
+#### **文字的基本處理**<br />
+<br />
+**<font color=blue>`paste()`</font>: 數個文字串成一個文字**<br />
+\# `sep =` : 分隔符號，預設為單一空白<br />
+<br />
+**<font color=blue>`paste0()`</font>: 數個文字串成一個文字(無分隔符號)**<br />
+```{r results='hide'}
+first_word <- "How"
+second_word <- "are"
+third_word <- "you?"
+
+paste(first_word, second_word, third_word)
+paste(first_word, second_word, third_word, sep = ",")
+paste(first_word, second_word, third_word, sep = "")
+paste0(first_word, second_word, third_word)
+```
+<br />
+<br />
+**<font color=blue>`substr()`</font>: 擷取部分文字**<br />
+\# `start =` : 起始位置<br />
+\# `stop =` : 停止位置<br />
+\# 通常用於已經固定長度且格式固定的文字 (Ex：身分證字號)<br />
+```{r results='hide'}
+sentence <- "How are you"
+substr(sentence, start = 1, stop = 3)
+substr(sentence, start = 5, stop = nchar(sentence))
+```
+<br />
+<br />
+**<font color=blue>`strsplit()`</font>: 依照切隔符號拆解文字，回傳值為list**<br />
+\# `split =` : 切割符號<br />
+```{r results='hide'}
+strsplit("How are you?", split = " ")
+strsplit(c("Phoebe Buffay", "Chandler Bing"), split = " ")
+```
+<br />
+**<font color=blue>`unlist()`</font>: 解除list結構，回傳值為向量**<br />
+\# 將所有拆解之元素結合成向量<br />
+```{r results='hide'}
+unlist(list(matrix(1:10, nrow = 2), 11:20))
+
+unlist(strsplit("How are you?", split = " "))
+unlist(strsplit(c("Phoebe Buffay", "Chandler Bing"), split = " "))
+```
+<br />
+
+#### **搜尋文字**<br />
+<br />
+**<font color=blue>`regexpr(pattern = , x)`</font>: 尋找"單一文字"中的指定特徵並回傳"第一個"找到的索引值**<br />
+\# pattern = : 指定特徵<br />
+```{r results='hide'}
+regexpr(pattern = "on", "we were on a break!")
+```
+<br />
+**<font color=blue>`gregexpr(pattern = , x)`</font>: 尋找"單一文字"中的指定特徵並回傳"全部"的索引值**<br />
+\# pattern = : 指定特徵<br />
+```{r results='hide'}
+gregexpr(pattern = "we", "we were on a break!")
+```
+<br />
+<br />
+**<font color=blue>`grep(pattern = , x)`</font>: 尋找"文字向量"中的指定特徵並回傳向量中有出現指定特徵的元素位置(索引值)**<br />
+\# pattern = : 指定特徵<br />
+```{r results='hide'}
+vec_sentence <- c("we", "were", "on", "a", "break!")
+
+grep(pattern = "we", vec_sentence)
+grep(pattern = "on", vec_sentence)
+grep(pattern = "WE", vec_sentence)
+```
+<br />
+**<font color=blue>`grepl(pattern = , x)`</font>: 尋找"文字向量"中的指定特徵並回傳向量中有出現指定特徵的元素位置(邏輯值)**<br />
+\# pattern = : 指定特徵<br />
+```{r results='hide'}
+vec_sentence <- c("we", "were", "on", "a", "break!")
+
+grepl(pattern = "we", vec_sentence)
+grepl(pattern = "on", vec_sentence)
+grepl(pattern = "WE", vec_sentence)
+```
+\# 搭配`sum()`計算出現次數<br />
+```{r results='hide'}
+library(magrittr)
+grepl(pattern = "we", vec_sentence) %>% sum()
+```
+<br />
+
+#### **修改文字**<br />
+<br />
+**<font color=blue>`sub(pattern = , replacement = , x)`</font>: 尋找"單一文字"中的指定特徵並取代"第一個"為指定文字**<br />
+\# pattern = : 指定特徵<br />
+\# replacement = : 欲修改之指定文字<br />
+```{r results='hide'}
+sentence <- "You threw my hamburger away. My hamburger? My hamburger?"
+sub(pattern = "hamburger", replacement = "sandwich", sentence)
+```
+<br />
+**<font color=blue>`gsub(pattern = , replacement = , x)`</font>: 尋找"單一文字"中的指定特徵並取代"全部"為指定文字**<br />
+\# pattern = : 指定特徵<br />
+\# replacement = : 欲修改之指定文字<br />
+```{r results='hide'}
+sentence <- "You threw my hamburger away. My hamburger? My hamburger?"
+gsub(pattern = "hamburger", replacement = "sandwich", sentence)
+```
+
