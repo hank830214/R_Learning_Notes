@@ -14,22 +14,52 @@
 
     - 常用基本函數
     
+        - 資料讀取
+    
         - apply家族
-
-- 資料型別
-
-    - 單一變數之資料型別
-
-    - 多變數之資料型別
-  
-- [讀取各類資料](https://hank830214.github.io/r_prg_web/read_data)
-
-- 基本繪圖
-
-    - [Base Plotting System](https://hank830214.github.io/r_prg_web/based_plotting)
-
-    - [ggplot2](https://hank830214.github.io/r_prg_web/ggplot2)
+        
+    - 文字資料處理
     
+        - 基本函數
+        
+        - 正規表達式
+        
+    - 時間資料處理
+    
+        - 基本函數
+        
+        - 套件 lubridate
+
+    - 資料整理
+    
+        - 套件 dplyr - 資料處理
+        
+        - 套件 tidyr - 長寬表格轉換
+        
+    - 基本繪圖
+    
+        - Base Plotting System
+        
+        - 套件 ggplot2
+
+- 爬蟲
+
+    - 靜態擷取
+    
+        - 範例：PPT
+    
+    - 動態擷取
+    
+        - 範例：股價搜尋
+
+- 統計分析
+
+    - 統計計算
+    
+    - 空間分析
+    
+    - 存活分析
+
 
 ### **推薦網站**
 
