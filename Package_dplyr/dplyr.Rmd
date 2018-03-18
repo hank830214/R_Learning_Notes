@@ -1,0 +1,99 @@
+---
+output: html_document
+---
+
+##  **資料整理：套件 `dplyr`**<br />
+
+<br />
+
+**讀取資料**<br />
+```{r}
+StuData <- read.csv('StuData.csv', header = T)
+StuData1 <- read.csv('StuData1.csv', header = T)
+StuData2 <- read.csv('StuData2.csv', header = T)
+```
+
+```{r}
+StuData
+StuData1
+StuData2
+```
+<br />
+**安裝及載入套件`dplyr`**<br />
+```{r message = F}
+# install.packages('dplyr')
+library(dplyr)
+```
+<br />
+<br />
+**<font color=blue>`select(資料, 欄位名稱1, ...)`</font>: 挑選特定欄位(行)資料**<br />
+\# Ex: 僅挑取與身材有關的資料<br />
+```{r results='hide'}
+select(StuData, ID, Height, Weight)
+```
+<br />
+\# `select(資料, starts_with(str))`: 挑選欄位名稱'開頭'有str的欄位<br />
+\# `select(資料, ends_with(str))`: 挑選欄位名稱'結尾'有str的欄位<br />
+\# `select(資料, contains(str))`: 挑選欄位名稱'包含'str的欄位，不分大小寫<br />
+\# `select(資料, matches(str))`: 挑選欄位名稱'包含'str(regular expression)'的欄位<br />
+```{r results='hide'}
+select(StuData, starts_with("I"), starts_with("H"), starts_with("W"))
+select(StuData, ends_with("D"), ends_with("t"))
+select(StuData, contains("d"), contains("ight"))
+select(StuData, matches("d."))
+```
+<br />
+<br />
+**<font color=blue>`filter(資料, 條件1, ...)`</font>: 依照特定條件篩選(列)資料**<br />
+\# Ex: 篩選低於15歲或超過20歲男生的資料<br />
+```{r results='hide'}
+filter(StuData, Gender == 'M', Age < 15 | Age > 20)
+```
+<br />
+<br />
+**<font color=blue>`arrange(資料, 欄位名稱1, ...)`</font>: 依照特定欄位排序資料，若有NA則排到最後**<br />
+\# Ex: 先依照年齡排列，同年齡的在按照身高降冪(desc)排列<br />
+```{r results='hide'}
+arrange(StuData, Age, desc(Height))
+```
+<br />
+<br />
+**<font color=blue>`mutate(資料, 新欄位名稱1 = 運算1, ...)`</font>: 運算現有欄位，以覆蓋原有欄位或產生新的欄位**<br />
+\# Ex: 新增BMI和Adult欄位<br />
+```{r results='hide'}
+StuData <- mutate(StuData, BMI = Weight/(Height/100)^2, Adult = ifelse(Age >= 18,1,0))
+StuData
+```
+<br />
+<br />
+**<font color=blue>`summarise()`</font>: 總結欄位資訊**<br />
+\# 搭配使用**<font color=blue>`group_by()`</font>**分群，並使用`sum`, `median`, `n()`等函數計算
+\# Ex: 計算成年與未成年之男女生的平均身高及人數<br />
+```{r results='hide'}
+summarise(group_by(StuData, Adult, Gender), Height_avg = mean(Height), Total = n())
+```
+<br />
+<br />
+**<font color=blue>`inner_join()`</font>: 內部連結**<br />
+```{r results='hide'}
+inner_join(StuData1, StuData2, by = "ID")
+```
+**<font color=blue>`left_join()`</font>: 左部連結**<br />
+```{r results='hide'}
+left_join(StuData1, StuData2, by = "ID")
+```
+**<font color=blue>`right_join()`</font>: 右部連結**<br />
+```{r results='hide'}
+right_join(StuData1, StuData2, by = "ID")
+```
+**<font color=blue>`full_join()`</font>: 全部連結**<br />
+```{r results='hide'}
+full_join(StuData1, StuData2, by = "ID")
+```
+<br />
+**<font color=blue>`anti_join()`</font>: 左外部連結**<br />
+```{r results='hide'}
+anti_join(StuData1, StuData2, by = "ID")
+anti_join(StuData2, StuData1, by = "ID")
+```
+
