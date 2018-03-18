@@ -14,7 +14,7 @@
     - 文字資料處理：正規表達式
     - 時間資料處理：基本函數
     - 時間資料處理：套件 lubridate
-    - 資料整理：套件 dplyr
+    - [資料整理：套件 dplyr](https://hank830214.github.io/R_Learning_Notes/Package_dplyr/dplyr.html)
     - 資料整理：套件 tidyr (長寬表格轉換)
     - 基本繪圖：Base Plotting System
         - 範例：畫k線圖
