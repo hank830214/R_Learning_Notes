@@ -9,8 +9,8 @@
 - 基礎
     - [輕鬆學習 R 語言](http://www.learn-r-the-easy-way.tw/chapters/1)
     - 常用基本函數
-    + 資料讀取
-    + apply家族
+        - 資料讀取
+        - apply家族
     - 文字資料處理
         - 基本函數
         - 正規表達式
