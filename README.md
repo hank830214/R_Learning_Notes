@@ -22,7 +22,7 @@
         - 套件 tidyr - 長寬表格轉換
     - 基本繪圖
         - Base Plotting System
-            - 範例：畫k線圖
+            - 範例：畫k線圖
         - 套件 ggplot2
 
 - 爬蟲
