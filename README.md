@@ -3,7 +3,10 @@
 
 
 ### **課程內容**
-- [基本指令](https://hank830214.github.io/r_prg_web/basic)
+- 基礎
+    學生推薦郭耀仁老師所寫的『輕鬆學習R語言』之網站，喜歡書本講義的，亦可以至博客來購買老師的書。
+
+    - [輕鬆學習 R 語言](http://www.learn-r-the-easy-way.tw/chapters/1)
 
 - 資料型別
 
