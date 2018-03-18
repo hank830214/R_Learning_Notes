@@ -8,17 +8,17 @@
 
 - 基礎
     - [輕鬆學習 R 語言](http://www.learn-r-the-easy-way.tw/chapters/1)
-    - 常用基本函數：資料讀取
-    - 常用基本函數：apply家族
-    - 文字資料處理：基本函數
-    - 文字資料處理：正規表達式
-    - 時間資料處理：基本函數
-    - 時間資料處理：套件 lubridate
-    - 資料整理：套件 dplyr
-    - 資料整理：套件 tidyr (長寬表格轉換)
-    - 基本繪圖：Base Plotting System
+    - 常用基本函數：資料讀取
+    - 常用基本函數：apply家族
+    - 文字資料處理：基本函數
+    - 文字資料處理：正規表達式
+    - 時間資料處理：基本函數
+    - 時間資料處理：套件 lubridate
+    - 資料整理：套件 dplyr
+    - 資料整理：套件 tidyr (長寬表格轉換)
+    - 基本繪圖：Base Plotting System
         - 範例：畫k線圖
-    - 基本繪圖：套件 ggplot2
+    - 基本繪圖：套件 ggplot2
 
 - 爬蟲
     - 靜態擷取
