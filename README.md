@@ -10,7 +10,7 @@
     - [輕鬆學習 R 語言](http://www.learn-r-the-easy-way.tw/chapters/1)
     - 常用基本函數：資料讀取
     - 常用基本函數：apply家族
-    - [文字資料處理：基本函數](https://hank830214.github.io/R_Learning_Notes/%E6%96%87%E5%AD%97%E8%B3%87%E6%96%99%E8%99%95%E7%90%86%EF%BC%9A%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B8/Text_function.html)
+    - [文字資料處理：基本函數](https://hank830214.github.io/R_Learning_Notes/%E6%96%87%E5%AD%97%E8%B3%87%E6%96%99%E8%99%95%E7%90%86/Text_function.html)
     - 文字資料處理：正規表達式
     - 時間資料處理：基本函數
     - 時間資料處理：套件 lubridate
