@@ -1,0 +1,139 @@
+---
+output: html_document
+---
+
+##  **時間資料處理：基本函數**<br />
+<br />
+
+#### **日期變數 `Date`**<br />
+<br />
+**<font color=blue>`as.Date()`</font>: 建立一日期變數**<br />
+\# 資料型別為`Date`<br />
+\# 預設格式(format)為 `%Y-%m-%d`<br />
+\# 查詢格式(format)的語法：`?strptime`<br />
+```{r results='hide'}
+as.Date("1970-01-01")
+as.Date("19700101", format = "%Y%m%d")
+as.Date("1970/01/01", format = "%Y/%m/%d")
+```
+<br />
+\# 日期對應一個數值，為自1970-1-1算起之天數(1970-1-1算0)<br />
+\# 意思是日期變數可進行數值加減運算<br />
+```{r results='hide'}
+date <- as.Date("1970-01-01")
+
+as.numeric(date)
+date + 1
+as.Date("1970-02-01") - date
+```
+<br />
+<br />
+**<font color=blue>`format()`</font>: 依照指定格式輸出，輸出為字串**<br />
+```{r results='hide'}
+date <- as.Date("2018-3-13")
+
+format(date, format = "%Y")
+format(date, format = "%m")
+format(date, format = "%d")
+format(date, format = "%Y-%m-%d")
+
+format(date, format = "%a")
+format(date, format = "%A")
+format(date, format = "%b")
+format(date, format = "%B")
+```
+<br />
+<br />
+**<font color=blue>`Sys.Date()`</font>: 回傳系統日期**<br />
+```{r results='hide'}
+Sys.Date()
+```
+<br />
+
+#### **日期時間變數 `POSIXct`**<br />
+<br />
+**<font color=blue>`as.POSIXct()`</font>: 建立一日期時間變數**<br />
+\# 資料型別為`POSIXct" "POSIXt`<br />
+\# 預設格式(format)為 `%Y-%m-%d %H:%M:%S`<br />
+```{r results='hide'}
+as.POSIXct("1970-01-01 08:00:00")
+as.POSIXct("1970-01-01 08:00:00", format = "%Y-%m-%d %H:%M:%S")
+as.POSIXct("19700101 08:00:00", format = "%Y%m%d %H:%M:%S")
+```
+<br />
+\# 日期時間可對應一個數值，為自1970-1-1 8:00:00算起之秒數(1970-1-1 8:00:00算0)<br />
+\# 意思是日期時間變數可進行數值加減運算<br />
+```{r results='hide'}
+time <- as.POSIXct("1970-01-01 08:00:00")
+
+as.numeric(time)
+time + 600
+as.POSIXct("1970-01-01 09:00:00") - time
+```
+<br />
+<br />
+**<font color=blue>`format()`</font>: 依照指定格式輸出，輸出為字串**<br />
+```{r results='hide'}
+time <- as.POSIXct("2018-3-13 13:52:00")
+
+format(time, format = "%Y-%m-%d")
+format(time, format = "%H")
+format(time, format = "%M")
+format(time, format = "%S")
+format(time, format = "%H:%M:%S")
+
+format(time, format = "%I:%M:%S %p")
+```
+<br />
+<br />
+**<font color=blue>`Sys.time()`</font>: 回傳系統日期時間**<br />
+```{r results='hide'}
+Sys.time()
+```
+<br />
+
+#### **其他函數**<br />
+<br />
+**<font color=blue>`difftime()`</font>: 計算時間差**<br />
+\# `units =` : 預設值為`auto` (可改為`secs`, `mins`, `hours`, `days`, `weeks`)<br />
+```{r results='hide'}
+difftime("2018-3-13 13:30:00", "2018-3-13 12:00:00", units = "auto")
+
+difftime("2018-3-13 13:30:00", "2018-3-13 12:00:00", units = "secs")
+difftime("2018-3-13 13:30:00", "2018-3-13 12:00:00", units = "mins")
+difftime("2018-3-13 13:30:00", "2018-3-13 12:00:00", units = "hours")
+
+difftime("2018-2-1 00:00:00", "2018-3-1 00:00:00", units = "days")
+difftime("2018-2-1 00:00:00", "2018-3-1 00:00:00", units = "weeks")
+```
+<br />
+\# 可使用`as.numeric()`將時間差去單位
+```{r results='hide'}
+as.numeric(difftime("2018-3-13 13:00:00", "2018-3-13 12:00:00", units = "secs"))
+```
+<br />
+<br />
+**<font color=blue>`Sys.setlocale("LC_TIME", )`</font>: 設定時間顯示之語言**<br />
+```{r results='hide'}
+time <- as.POSIXct("2018-3-13 13:00:00")
+
+# 設定為英文
+Sys.setlocale("LC_TIME", "english")
+
+format(time, format = "%a")
+format(time, format = "%A")
+format(time, format = "%b")
+format(time, format = "%B")
+format(time, format = "%I:%M:%S %p")
+
+# 設定為中文
+Sys.setlocale("LC_TIME", "cht")
+
+format(time, format = "%a")
+format(time, format = "%A")
+format(time, format = "%b")
+format(time, format = "%B")
+format(time, format = "%I:%M:%S %p")
+```
+
+
