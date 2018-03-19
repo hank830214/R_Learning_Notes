@@ -1,0 +1,60 @@
+---
+output: html_document
+---
+
+##  **資料整理：套件 `tidyr`**<br />
+
+<br />
+
+**讀取資料**<br />
+```{r}
+consumption <- read.csv('consumption.csv', header = T, stringsAsFactors = F)
+consumption$Date <- as.Date(consumption$Date)
+```
+
+```{r}
+head(consumption)
+```
+<br />
+**安裝及載入套件`tidyr`**<br />
+```{r message = F}
+# install.packages('tidyr')
+library(tidyr)
+```
+<br />
+<br />
+**<font color=blue>`gather(資料, key = key_name, value = value_name, 堆疊欄位1, ...)`</font>: 寬表格(short format)變長表格(long format)**<br />
+```{r message = F}
+library(dplyr)
+library(magrittr)
+cons_long <- gather(select(consumption, -c(Day, Stage, Total)), key = category, value = amount, -Date) %>% arrange(Date)
+head(cons_long)
+```
+<br />
+**<font color=blue>`spread(資料, key = key_name, value = value_name)`</font>: 長表格(long format)變寬表格(short format)**<br />
+```{r}
+cons_short <- spread(cons_long, key = category, value = amount)
+head(cons_short)
+```
+<br />
+\# 長表格的其中一個好處：方便在同一張圖畫出多種類別的長條圖
+```{r message = F}
+library(ggplot2)
+ggplot(cons_long, aes(x = factor(Date), y = amount, fill = category)) +
+  geom_bar(stat = "identity", position = "dodge")
+```
+<br />
+<br />
+**<font color=blue>`unite(資料, 合併後變數名稱, 合併變數1, 合併變數2, ..., sep = 分隔符號)`</font>: 合併變數**<br />
+\# sep = : 合併之分隔符號
+```{r}
+consumption <- unite(consumption, day_stage, Day, Stage, sep = "_")
+head(consumption)
+```
+<br />
+**<font color=blue>`seperate(資料, col = 欲分離之變數, into = 分離後變數名稱, sep = 分隔符號)`</font>: 分離變數**<br />
+\# sep = : 分離之分隔符號，預設為任意非字母符號
+```{r}
+consumption <- separate(consumption, col = day_stage, into = c("Day", "Stage"), sep = "_")
+head(consumption)
+```
