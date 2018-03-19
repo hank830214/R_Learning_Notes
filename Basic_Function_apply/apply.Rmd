@@ -1,0 +1,72 @@
+---
+output: html_document
+---
+
+##  **常用基本函數：apply家族**<br />
+
+<br />
+**<font color=blue>`apply()`</font>: apply functions over margins**<br />
+\# 輸入類型: matrix, array, data.frame<br />
+\# `MARGIN =` : 運算方式 (1 for rows, 2 for columns, c(1,2) for both)<br />
+\# `FUN =` : 套用函數<br />
+```{r}
+apply(cars, MARGIN = 2, FUN = mean)
+```
+<br />
+<br />
+**<font color=blue>`tapply()`</font>: apply functions to each group which is broken up by a 'factor'**<br />
+\# 輸入類型: columns of data.frame<br />
+\# `INDEX =` : 欲分組的類別變數<br />
+\# `FUN =` : 套用函數<br />
+```{r}
+tapply(iris$Sepal.Length, INDEX = iris$Species, FUN = mean)
+```
+<br />
+<br />
+**<font color=blue>`sapply()`</font>: apply functions to each element of a vector or a list**<br />
+\# 輸入類型: vector 或 list<br />
+\# 輸出類型: vector or matrix<br />
+\# `FUN =` : 套用函數<br />
+```{r}
+x <- list(a = 1, b = 1:3, c = 11:100)
+```
+
+```{r}
+sapply(x, FUN = length)
+sapply(x, FUN = sum)
+```
+
+```{r}
+sapply(1:5,function(x) rnorm(3,x))
+```
+<br />
+**<font color=blue>`lapply()`</font>: apply functions to each element of a vector or a list**<br />
+\# 輸入類型: vector 或 list<br />
+\# 輸出類型: list<br />
+\# `FUN =` : 套用函數<br />
+```{r}
+x <- list(a = 1, b = 1:3, c = 11:100)
+```
+
+```{r}
+lapply(x, FUN = length)
+lapply(x, FUN = sum)
+```
+
+```{r}
+lapply(1:5,function(x) rnorm(3,x))
+```
+<br />
+<br />
+**<font color=blue>`mapply()`</font>: apply a function to multiple list or vector 'arguments'**<br />
+\# 輸出類型: array or list<br />
+\# `FUN =` : 套用函數<br />
+```{r}
+mapply(rnorm, n = 20, mean = c(-1, 0, 1), sd = 1)
+```
+
+```{r}
+mapply(rep, times = 1:4, x = c("How", "are", "you", "?"))
+```
+
+
