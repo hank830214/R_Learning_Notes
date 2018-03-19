@@ -17,14 +17,11 @@
     - [資料整理：套件 dplyr](https://hank830214.github.io/R_Learning_Notes/Package_dplyr/dplyr.html)
     - [資料整理：套件 tidyr (長寬表格轉換)](https://hank830214.github.io/R_Learning_Notes/Package_tidyr/tidyr.html)
     - 基本繪圖：Base Plotting System
-        - 範例：畫k線圖
     - 基本繪圖：套件 ggplot2
 
 - 爬蟲
     - 靜態擷取
-        - 範例：PPT
     - 動態擷取
-        - 範例：股價搜尋
 
 - 統計分析
     - 統計計算
@@ -32,7 +29,7 @@
     - 存活分析
 
 
-### **特殊主題**
+### **範例實作**
 
 - 畫k線圖 (基本繪圖：Base Plotting System)
 
