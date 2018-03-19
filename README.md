@@ -12,7 +12,7 @@
     - [常用基本函數：apply家族](https://hank830214.github.io/R_Learning_Notes/Basic_Function_apply/apply.html)
     - [文字資料處理：基本函數](https://hank830214.github.io/R_Learning_Notes/Text_Data_Handling/Text_function.html)
     - 文字資料處理：正規表達式
-    - 時間資料處理：基本函數
+    - [時間資料處理：基本函數](https://hank830214.github.io/R_Learning_Notes/Time_Data_Handling/DateTime_function.html)
     - 時間資料處理：套件 lubridate
     - [資料整理：套件 dplyr](https://hank830214.github.io/R_Learning_Notes/Package_dplyr/dplyr.html)
     - [資料整理：套件 tidyr (長寬表格轉換)](https://hank830214.github.io/R_Learning_Notes/Package_tidyr/tidyr.html)
