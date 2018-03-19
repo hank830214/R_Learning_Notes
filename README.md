@@ -9,7 +9,7 @@
 - 基礎
     - [輕鬆學習 R 語言](http://www.learn-r-the-easy-way.tw/chapters/1)
     - 常用基本函數：資料讀取
-    - 常用基本函數：apply家族
+    - [常用基本函數：apply家族](https://hank830214.github.io/R_Learning_Notes/Basic_Function_apply/apply.html)
     - [文字資料處理：基本函數](https://hank830214.github.io/R_Learning_Notes/Text_Data_Handling/Text_function.html)
     - 文字資料處理：正規表達式
     - 時間資料處理：基本函數
