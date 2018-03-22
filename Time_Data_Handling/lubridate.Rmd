@@ -1,0 +1,65 @@
+---
+output: html_document
+---
+
+##  **時間資料處理：套件 `lubridate`**<br />
+<br />
+
+**安裝及載入套件 `lubridate`**<br />
+```{r message=F}
+# install.packages("lubridate")
+library(lubridate)
+```
+<br />
+<br />
+**快速產生日期時間變數: <font color=blue>`ymd()`</font>, <font color=blue>`ymd_hms()`</font>, <font color=blue>`mdy()`</font>, <font color=blue>`mdy_hms()`</font>, ...**<br />
+```{r results='hide'}
+ymd("2018-3-13")
+ymd("2018-03-13")
+ymd("2018/3/13")
+ymd("2018/03/13")
+ymd("20180313")
+ymd(20180313)
+
+mdy("3-13-2018")
+dmy("13-3-2018")
+
+ymd_hms("2018-3-13 14:00:00")
+```
+<br />
+<br />
+**回傳時間單位之組成: <font color=blue>`year()`</font>, <font color=blue>`month()`</font>, <font color=blue>`day()`</font>, <font color=blue>`hour()`</font>, <font color=blue>`minute()`</font>, <font color=blue>`second()`</font>**<br />
+```{r results='hide'}
+time <- ymd_hms("2018-3-13 14:30:00")
+
+year(time)
+month(time)
+day(time)
+hour(time)
+minute(time)
+second(time)
+
+wday(time)
+mday(time)
+yday(time)
+wday(time, label = T)
+wday(time, label = T, abbr = F)
+as.character(wday(time, label = T))
+as.character(wday(time, label = T, abbr = F))
+
+year(time) <- 2000
+time
+```
+<br />
+<br />
+**判斷某時間是否落在某期間範圍**<br />
+\# **<font color=blue>`interval()`</font>: 建立時間區間**<br />
+\# **<font color=blue>`%within%`</font>: 判斷是否落在時間範圍**<br />
+```{r results='hide'}
+time1 <- ymd_hms("2018-1-1 00:00:00")
+time2 <- ymd_hms("2018-7-1 00:00:00")
+
+interval(time1, time2)
+ymd_hms("2000-1-1 00:00:00") %within% interval(time1, time2)
+Sys.time() %within% interval(time1, time2)
+```
