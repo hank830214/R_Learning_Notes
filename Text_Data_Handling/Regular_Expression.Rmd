@@ -1,0 +1,227 @@
+---
+output: html_document
+---
+
+##  **文字資料處理：正規表達式**<br />
+<br />
+\# 有規則之文字敘述通常即可使用正規表達式<br />
+<br />
+
+#### **釋例**<br />
+**尋找位置(1) - 欲辨識一個句子中所有數字之所在位置**<br />
+\# <font color=blue>`[0-9]`</font>: 數字之正規表達式<br />
+\# `gregexpr(pattern = , x)`：尋找"單一文字"中的指定特徵並回傳"全部"的索引值<br />
+```{r}
+a_sentence <- "Monica has 9 or 13, maybe 15 categories of towels?"
+gregexpr(pattern = "[0-9]", a_sentence)
+```
+<br />
+**尋找位置(2) - 欲辨識一個句子中所有整數之所在位置**<br />
+\# <font color=blue>`[0-9]+`</font>: 整數的正規表達式，`+`代表連續出現即當作一次<br />
+```{r}
+a_sentence <- "Monica has 9 or 13, maybe 15 categories of towels?"
+gregexpr(pattern = "[0-9]+", a_sentence)
+```
+<br />
+**斷詞**<br />
+\# <font color=blue>`[: ,.]`</font>: 涵蓋`":"`和`" "`和`","`和`"."`<br />
+\# `strsplit()`: 依照切隔符號拆解文字，回傳值為list<br />
+```{r}
+a_sentence <- "Joey: This guy says hello, I wanna kill myself."
+```
+```{r}
+strsplit(a_sentence, split = "[: ,.]")
+strsplit(a_sentence, split = "[: ,.]+")
+```
+<br />
+**尋找位置(3) - 欲辨識一文字向量中所有包含整數之所在位置**<br />
+\# `unlist()`: 解除list結構，回傳值為向量<br />
+\# `grep(pattern = , x)`: 尋找"文字向量"中的指定特徵並回傳向量中有出現指定特徵的元素位置(索引值)<br />
+\# `grepl(pattern = , x)`: 尋找"文字向量"中的指定特徵並回傳向量中有出現指定特徵的元素位置(邏輯值)<br />
+```{r}
+a_sentence <- "Monica has 11 or 13, maybe 15k categories of towels?"
+word_vector <- unlist(strsplit(a_sentence, split = "[: ,.?]+"))
+word_vector
+```
+```{r}
+grep(pattern = "[0-9]+", word_vector)
+grepl(pattern = "[0-9]+", word_vector)
+```
+<br />
+**取代**<br />
+\# `sub(pattern = , replacement = , x)`: 尋找"單一文字"中的指定特徵並取代"第一個"為指定文字<br />
+\# `gsub(pattern = , replacement = , x)`: 尋找"單一文字"中的指定特徵並取代"全部"為指定文字<br />
+```{r}
+a_sentence <- "Monica has 11 or 13, maybe 15 categories of towels?"
+```
+```{r}
+sub(pattern = "[0-9]+", a_sentence, replacement = "X")
+gsub(pattern = "[0-9]+", a_sentence, replacement = "X")
+```
+<br />
+<br />
+
+#### **常用的正規表達式**<br />
+\# 整數: <font color=blue>`[0-9]+`</font> 或 <font color=blue>`[\d]`</font><br />
+\# 浮點數: <font color=blue>`[0-9]+\\.[0-9]+`</font> 或 <font color=blue>`[\d]+\\.[\d]+`</font><br />
+\# 英文: <font color=blue>`[A-Za-z]+`</font><br />
+<br />
+\# 小數點`.`: 需要用兩個`\`來跳脫字元<br />
+\# 電子郵件信箱: <font color=blue>`[a-zA-Z0-9_]+@[a-zA-Z0-9\\._]+`</font><br />
+\# 英文: <font color=blue>`[A-Za-z]+`</font><br />
+<br />
+<br />
+**判斷非整數之數值**<br />
+```{r}
+a_sentence <- c("半程馬拉松是 21 km", "全程馬拉松是 42.195 公里")
+grepl(pattern = "[0-9]+\\.[0-9]+", a_sentence)
+```
+<br />
+**判斷英文**<br />
+```{r}
+a_sentence <- c("半程馬拉松是 21 km", "全程馬拉松是 42.195 公里")
+grepl(pattern = "[A-Za-z]+", a_sentence)
+```
+<br />
+**判斷電子郵件信箱**<br />
+```{r}
+word_vector <- c("Chandler Bing", "cb@friends.com")
+grepl(pattern = "[a-zA-Z0-9_]+@[a-zA-Z0-9\\._]+", word_vector)
+```
+<br />
+**判斷網址**<br />
+\# <font color=blue>`()?`</font>: 代表括號內文字可省略<br />
+```{r}
+word_vector <- c("Chandler Bing", "cb@friends.com")
+grepl(pattern = "[a-zA-Z0-9_]+@[a-zA-Z0-9\\._]+", word_vector)
+```
+<br />
+<br />
+
+#### **正規表達式的特殊字元**<br />
+\# <font color=blue>`.`</font>: 可以用來表達"任何字元"<br />
+```{r}
+words <- c("", " ", "a", "24", "@", "傻瓜")
+grepl(pattern = ".", words)
+```
+<br />
+\# <font color=blue>`\`</font>: 可以用來跳脫特殊字元<br />
+```{r}
+words <- c("Chandler Bing", "Chandler.Bing")
+```
+```{r}
+grepl(pattern = ".", words)
+grepl(pattern = "\\.", words)
+```
+<br />
+\# <font color=blue>`^`</font>: 可以用來比對"開頭文字"<br />
+```{r}
+words <- c("Bing", "Geller", "Green", "Buffay", "Tribbiani", "gG")
+grepl(pattern = "^G", words)
+```
+<br />
+\# <font color=blue>`$`</font>: 可以用來比對"結尾文字"<br />
+\# `$` 放在文字後面<br />
+```{r}
+sentence <- c("Monica", "darling", "it's", "Amanda", "calling")
+grepl(pattern = "ing$", sentence)
+```
+<br />
+\# <font color=blue>`*`</font>: 可以用來比對出現零次或多次的文字 (可有可無)<br />
+\# `*` 作用在前一個字元上<br />
+```{r}
+words <- c("friends", "frriends", "fantasy", "Friends")
+grepl(pattern = "fr*i", words)
+```
+<br />
+\# <font color=blue>`+`</font>: 可以用來比對出現一次或多次的文字 (至少1次)<br />
+\# `+` 作用在r上，至少出現一次<br />
+```{r}
+words <- c("friends", "frriends", "fantasy", "Friends")
+grepl(pattern = "fr+", words)
+```
+<br />
+\# <font color=blue>`?`</font>: 可以用來比對出現零次或一次的文字 (0或1)<br />
+```{r}
+words <- c("friends", "first", "frrist")
+grepl(pattern = "fr?i", words)
+```
+```{r}
+a_sentence <- c("半程馬拉松是 21 km", "全程馬拉松是 42.195 公里")
+grepl(pattern = "[0-9]+(\\.[0-9]+)?", a_sentence)
+```
+<br />
+<br />
+\# <font color=blue>`{}`</font>: 可以用來比對文字出現的次數<br />
+\# <font color=blue>`x{3}`</font>   : 剛好3個 x<br />
+\# <font color=blue>`x{1,3}`</font> : 1到3個 x<br />
+\# <font color=blue>`x{1,}`</font>  : 至少1個 x<br />
+\# <font color=blue>`x{,3}`</font>  : 最多3個 x<br />
+```{r}
+words <- c("y", "x", "xx", "xxx")
+```
+```{r}
+grepl(pattern = "x{3}", words)
+grepl(pattern = "x{1,3}", words)
+grepl(pattern = "x{1,}", words)
+grepl(pattern = "x{,3}", words)
+```
+<br />
+\# <font color=blue>`[]`</font>: 可以用來比對是否"包含"某些文字<br />
+```{r}
+sentences <- c("我喜歡 6 人行", "I love Friends", "我最喜歡 CENTRAL PERK", "我喜歡那個咖啡館")
+```
+```{r}
+grepl(pattern = "[0-9]", sentences) # 是否含數字
+grepl(pattern = "[0-9a-z]", sentences) # 是否含數字與小寫英文
+grepl(pattern = "[0-9a-zA-Z]", sentences) # 是否含數字與英文
+```
+<br />
+\# <font color=blue>`[^]`</font>: 可以用來比對是否"不包含"某些文字<br />
+```{r}
+words <- c("10", "Friends", "六人行")
+```
+```{r}
+grepl(pattern = "[^0-9]", words) # 非數字
+grepl(pattern = "[^0-9A-Za-z]", words) # 非數字與非英文
+```
+<br />
+\# <font color=blue>`|`</font>: 代表"或"<br />
+```{r}
+words <- c("food", "foot", "hoot")
+```
+```{r}
+grepl(pattern = "foo(d|t)", words)  # d或t都可
+grepl(pattern = "food|t", words) 
+```
+```{r}
+words <- c("foot", "zoot", "hoot", "boot", "food")
+grepl(pattern = "(f|b|h)oot", words)
+```
+<br />
+<br />
+\# <font color=blue>`\n`</font>: 比對換行符號<br />
+```{r}
+sentence <- c("Monica darling, it's Amanda calling",
+              "Monica darling,
+              it's Amanda calling")
+sentence
+```
+```{r}
+grepl(pattern = "\\n", sentence)
+```
+<br />
+\# <font color=blue>`\s`</font>: 比對空白<br />
+```{r}
+sentence <- c("IloveFriends", "I love Friends")
+grepl(pattern = "\\s", sentence)
+```
+<br />
+\# <font color=blue>`\t`</font>: 比對 Tab 之空白間隔<br />
+```{r}
+sentence <- c("I love Friends", "I\tlove\tFriends")
+writeLines(sentence)
+```
+```{r}
+grepl(pattern = "\\t", sentence)
+```
